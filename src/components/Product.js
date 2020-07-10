@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Card } from 'antd';
 
 function Product(props){
   return (
     <React.Fragment>
       <div onClick = {() => props.whenProductClicked(props.id)}>
-        <h3>{props.name}</h3>
+        <Card title={props.name}>
         <h4>Made by: {props.brand}</h4>
-        <hr/>
+        <h4>Stock Remaining: {props.quantity}</h4>
+        </Card>
       </div>  
     </React.Fragment>
   );
