@@ -13,7 +13,6 @@ class ProductControl extends React.Component{
     super(props);
     this.state = {
       selectedProduct: null,
-      editing: false
     }
   }
 
@@ -21,7 +20,6 @@ class ProductControl extends React.Component{
     if(this.state.selectedProduct){
       this.setState({
         editing: false,
-        formVisibleOnPage: false,
         selectedProduct: null
       });
     }else{
@@ -46,7 +44,11 @@ class ProductControl extends React.Component{
   } 
 
   handleEditClick = () => {
-    this.setState({editing: true})
+    const {dispatch} = this.props;
+      const action = {
+        type: 'TOGGLE_EDIT'
+      }
+      dispatch(action)
   }
 
   handleEditingProduct = (productToEdit) => {
@@ -87,27 +89,27 @@ class ProductControl extends React.Component{
     
   }
   
-  handleDecrementingQuantity = (productToEdit) => {
-    const {dispatch} = this.props;
-    const {name, price, quantity, id} = productToEdit;
-    const action = {
-      type: 'ADD_PRODUCT',
-      name: name,
-      price: price,
-      quantity: quantity--,
-      id: id
-    }
-    dispatch(action);
-    this.setState({ 
-      editing: false,
-      selectedProduct: null
-    })
-  }
+  // handleDecrementingQuantity = (productToEdit) => {
+  //   const {dispatch} = this.props;
+  //   const {name, price, quantity, id} = productToEdit;
+  //   const action = {
+  //     type: 'ADD_PRODUCT',
+  //     name: name,
+  //     price: price,
+  //     quantity: quantity--,
+  //     id: id
+  //   }
+  //   dispatch(action);
+  //   this.setState({ 
+  //     editing: false,
+  //     selectedProduct: null
+  //   })
+  // }
 
   render(){
     let currentlyVisibleState = null;
     let buttonText = null
-    if(this.state.editing){
+    if(this.props.editing){
       currentlyVisibleState = <EditProductForm product = {this.state.selectedProduct} onEditProduct = {this.handleEditingProduct}/>
       buttonText="See all of our beers!"
     }else if(this.state.selectedProduct){
@@ -137,7 +139,8 @@ ProductControl.propTypes = {
 const mapStateToProps = state => {
   return{
     productList: state.productList,
-    formVisibleOnPage: state.formVisibleOnPage
+    formVisibleOnPage: state.formVisibleOnPage,
+    editing: state.editing
   }
 }
 
