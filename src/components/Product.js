@@ -6,7 +6,7 @@ function Product(props){
   return (
     <React.Fragment>
       <div onClick = {() => props.whenProductClicked(props.id)}>
-        <Card title={props.name}>
+        <Card title={props.name} style={{width: 200}}>
         <h4>Made by: {props.brand}</h4>
         <h4>Stock Remaining: {props.quantity}</h4>
         </Card>

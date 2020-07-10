@@ -7,25 +7,28 @@ function ProductList(props) {
 
     return(
       <React.Fragment>
-        <h1 className="header">Our Glorious Beer Selection!</h1>
-        <h4 className="header">It appears as though all of the beer is gone!  Please check back soon, or add a keg!</h4>
+        <div>
+          <h1 className="header">Our Glorious Beer Selection!</h1>
+          <h4 className="header">It appears as though all of the beer is gone!  Please check back soon, or add a keg!</h4>
+        </div>
       </React.Fragment>
     )
   }else{
     return(
       <React.Fragment>
         <h1 className="header">Our Glorious Beer Selection!</h1>
-        {Object.values(props.productList).map((product) => 
-        <Product
-          whenProductClicked = { props.onProductSelection}
-          name={product.name}
-          brand={product.brand}
-          price={product.price}
-          quantity={product.quantity}
-          id={product.id}
-          key={product.id}/>
-
-        )}
+        <div className="flex-container">
+          {Object.values(props.productList).map((product) => 
+          <Product
+            whenProductClicked = { props.onProductSelection}
+            name={product.name}
+            brand={product.brand}
+            price={product.price}
+            quantity={product.quantity}
+            id={product.id}
+            key={product.id}/>
+          )}
+        </div>
       </React.Fragment>
     )
   }
