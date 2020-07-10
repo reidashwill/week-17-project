@@ -21,9 +21,8 @@ describe('tap room actions', () => {
   });
 
   it('selectProduct should create SELECT_PRODUCT action', () => {
-    expect(actions.selectProduct(1)).toEqual({
-      type: 'SELECT_PRODUCT',
-      id: 1
+    expect(actions.selectProduct()).toEqual({
+      type: 'SELECT_PRODUCT'
     })
   })
 
