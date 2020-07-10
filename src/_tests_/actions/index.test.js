@@ -1,5 +1,4 @@
 import * as actions from './../../actions';
-import { waitForElementToBeRemoved } from '@testing-library/react';
 
 describe('tap room actions', () => {
   it('deleteProduct should create DELETE_PRODUCT action', () => {

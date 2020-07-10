@@ -121,9 +121,11 @@ class ProductControl extends React.Component{
     }
     return(
       <React.Fragment>
-        {currentlyVisibleState}
-        <div>
-          <button onClick={this.handleClick}>{buttonText}</button>
+        <div className='flex-container'>
+          {currentlyVisibleState}
+        </div>
+        <div className='flex-item'>
+          <button className='flex-item' onClick={this.handleClick}>{buttonText}</button>
         </div>
       </React.Fragment>
     )
