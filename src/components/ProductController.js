@@ -21,11 +21,12 @@ class ProductControl extends React.Component{
       const action = {
         type: 'TOGGLE_EDIT'
       }
+      dispatch(action)
       const action2 = {
         type: 'TOGGLE_FORM'
       }
       dispatch(action2)
-    }else if(this.props.selectedProduct){
+    }else if(this.props.selectedProduct != null){
       const {dispatch} = this.props;
       const action = {
         type: 'SELECT_PRODUCT',
@@ -66,15 +67,25 @@ class ProductControl extends React.Component{
 
   handleEditingProduct = (productToEdit) => {
     const {dispatch} = this.props;
-    const {name, price, quantity, id} = productToEdit;
+    const {id, name, price, quantity} = productToEdit;
     const action = {
       type: 'ADD_PRODUCT',
+      id: id,
       name: name,
       price: price,
       quantity: quantity,
-      id: id
+      
     }
     dispatch(action);
+    const action2 = {
+      type: 'SELECT_PRODUCT',
+      product: null
+    }
+    dispatch(action2)
+    const action3 = {
+      type: 'TOGGLE_EDIT'
+    }
+    dispatch(action3)
   }
 
   handleChangingSelectedProduct = (id) => {
