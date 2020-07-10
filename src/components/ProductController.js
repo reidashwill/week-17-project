@@ -9,11 +9,11 @@ import PropTypes from "prop-types";
 
 class ProductControl extends React.Component{
 
-  constructor(props){
-    super(props);
-    this.state = {
-    }
-  }
+  // constructor(props){
+  //   super(props);
+  //   this.state = {
+  //   }
+  // }
 
   handleClick = () => {
     if(this.props.selectedProduct){
@@ -43,9 +43,6 @@ class ProductControl extends React.Component{
       id: id
     }
     dispatch(action)
-    // this.setState({
-    //   selectedProduct: null
-    // })
   } 
 
   handleEditClick = () => {
@@ -67,10 +64,6 @@ class ProductControl extends React.Component{
       id: id
     }
     dispatch(action);
-    // this.setState({ 
-    //   editing: false,
-    //   selectedProduct: null
-    // })
   }
 
   handleChangingSelectedProduct = (id) => {
@@ -150,7 +143,8 @@ const mapStateToProps = state => {
   return{
     productList: state.productList,
     formVisibleOnPage: state.formVisibleOnPage,
-    editing: state.editing
+    editing: state.editing,
+    selectedProduct: state.selectedProduct
   }
 }
 
