@@ -3,6 +3,8 @@ import ProductList from './ProductList'
 import NewProductForm from './NewProductForm'
 import ProductDetail from './ProductDetail'
 import EditProductForm from './EditProductForm'
+import { connect } from 'react-redux';
+import PropTypes from "prop-types";
 
 
 class ProductControl extends React.Component{
@@ -11,7 +13,6 @@ class ProductControl extends React.Component{
     super(props);
     this.state = {
       formVisibleOnPage: false,
-      masterProductList: [],
       selectedProduct: null,
       editing: false
     }
@@ -32,9 +33,13 @@ class ProductControl extends React.Component{
   }
 
   handleDeletingProduct = (id) => {
-    const newMasterProductList = this.state.masterProductList.filter(product => product.id !== id);
+    const {dispatch} = this.props;
+    const action = {
+      type: "DELETE_PRODUCT",
+      id: id
+    }
+    dispatch(action)
     this.setState({
-      masterProductList: newMasterProductList,
       selectedProduct: null
     })
   } 
@@ -44,31 +49,56 @@ class ProductControl extends React.Component{
   }
 
   handleEditingProduct = (productToEdit) => {
-    const editedProductList = this.state.masterProductList.filter(product => product.id !== this.state.selectedProduct.id).concat(productToEdit);
-    this.setState({
-      masterProductList: editedProductList,
+    const {dispatch} = this.props;
+    const {name, price, quantity, id} = productToEdit;
+    const action = {
+      type: 'ADD_PRODUCT',
+      name: name,
+      price: price,
+      quantity: quantity,
+      id: id
+    }
+    dispatch(action);
+    this.setState({ 
       editing: false,
       selectedProduct: null
     })
   }
 
   handleChangingSelectedProduct = (id) => {
-    const selectedProduct = this.state.masterProductList.filter(product => product.id === id)[0];
+    const selectedProduct = this.props.productList[id];
     this.setState({selectedProduct: selectedProduct})
   }
 
   handleAddingNewProductToList = (newProduct) => {
-    const newMasterProductList = this.state.masterProductList.concat(newProduct);
-    this.setState({masterProductList: newMasterProductList, formVisibleOnPage: false})
+    const {dispatch} = this.props;
+    const {name, price, quantity, id} = newProduct;
+    const action = {
+      type: 'ADD_PRODUCT',
+      name: name,
+      price: price,
+      quantity: quantity,
+      id: id
+    }
+    dispatch(action);
+    this.setState({formVisibleOnPage: false})
   }
   
   handleDecrementingQuantity = (productToEdit) => {
-    productToEdit.quantity --
-    const editedMasterProductList = this.state.masterProductList.filter(product => product.id !== this.state.selectedProduct.id).concat(productToEdit);
-    this.setState({
-      masterProductList: editedMasterProductList,
+    const {dispatch} = this.props;
+    const {name, price, quantity, id} = productToEdit;
+    const action = {
+      type: 'ADD_PRODUCT',
+      name: name,
+      price: price,
+      quantity: quantity--,
+      id: id
+    }
+    dispatch(action);
+    this.setState({ 
+      editing: false,
       selectedProduct: null
-    });
+    })
   }
 
   render(){
@@ -84,7 +114,7 @@ class ProductControl extends React.Component{
       currentlyVisibleState = <NewProductForm onNewProductCreation={this.handleAddingNewProductToList}/>
       buttonText = "See all of our beers!"
     }else{
-      currentlyVisibleState = <ProductList productList={this.state.masterProductList} onProductSelection={this.handleChangingSelectedProduct}/>
+      currentlyVisibleState = <ProductList productList={this.props.productList} onProductSelection={this.handleChangingSelectedProduct}/>
       buttonText = "Add a Keg!"
     }
     return(
@@ -96,4 +126,17 @@ class ProductControl extends React.Component{
   }
 
 }
+
+ProductControl.propTypes = {
+  productList: PropTypes.object
+}
+
+const mapStateToProps = state => {
+  return{
+    productList: state
+  }
+}
+
+ProductControl = connect(mapStateToProps)(ProductControl);
+
 export default ProductControl
