@@ -15,9 +15,9 @@ export const addProduct = (product) => {
   }
 }
 
-export const selectProduct = id => ({
+export const selectProduct = (product) => ({
   type: 'SELECT_PRODUCT',
-  id
+  product
 });
 
 export const toggleForm = () => ({

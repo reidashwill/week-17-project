@@ -19,6 +19,7 @@ function EditProductForm (props) {
 }
 
 EditProductForm.propTypes = {
-  onEditProduct: PropTypes.func
+  onEditProduct: PropTypes.func,
+  product: PropTypes.object,
 }
 export default EditProductForm;

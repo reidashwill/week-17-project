@@ -18,6 +18,8 @@ Product.propTypes = {
   brand: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   quantity: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  whenProductClicked: PropTypes.func
 };
 
 export default Product;

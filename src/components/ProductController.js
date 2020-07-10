@@ -5,6 +5,7 @@ import ProductDetail from './ProductDetail'
 import EditProductForm from './EditProductForm'
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
+import * as a from './../actions';
 
 
 class ProductControl extends React.Component{
@@ -18,120 +19,87 @@ class ProductControl extends React.Component{
   handleClick = () => {
     if(this.props.editing){
       const {dispatch} = this.props;
-      const action = {
-        type: 'TOGGLE_EDIT'
-      }
+      const action = a.toggleEdit()
       dispatch(action)
-      const action2 = {
-        type: 'TOGGLE_FORM'
-      }
+      const action2 = a.toggleForm()
       dispatch(action2)
     }else if(this.props.selectedProduct != null){
       const {dispatch} = this.props;
-      const action = {
-        type: 'SELECT_PRODUCT',
-        product: null
-      }
+      const action = a.selectProduct(null)
       dispatch(action)
     }else{
       const {dispatch} = this.props;
-      const action = {
-        type: 'TOGGLE_FORM'
-      }
+      const action = a.toggleForm()
       dispatch(action)
     }
-    
   }
 
   handleDeletingProduct = (id) => {
     const {dispatch} = this.props;
-    const action = {
-      type: "DELETE_PRODUCT",
-      id: id
-    }
+    const action = a.deleteProduct(id)
     dispatch(action)
-    const action2 = {
-      type: 'SELECT_PRODUCT',
-      product: null
-    }
+    const action2 = a.selectProduct(null)
     dispatch(action2)
   } 
 
   handleEditClick = () => {
     const {dispatch} = this.props;
-      const action = {
-        type: 'TOGGLE_EDIT'
-      }
-      dispatch(action)
+    const action = a.toggleEdit()
+    dispatch(action)
   }
 
   handleEditingProduct = (productToEdit) => {
     const {dispatch} = this.props;
     const {id, name, brand, price, quantity} = productToEdit;
-    const action = {
-      type: 'ADD_PRODUCT',
-      id: id,
+    const action = a.addProduct({
       name: name,
       brand: brand,
       price: price,
       quantity: quantity,
-      
-    }
-    dispatch(action);
-    const action2 = {
-      type: 'SELECT_PRODUCT',
-      product: null
-    }
+      id: id
+    })
+    dispatch(action)
+    const action2 = a.selectProduct(null)
     dispatch(action2)
-    const action3 = {
-      type: 'TOGGLE_EDIT'
-    }
+    const action3 = a.toggleEdit()
     dispatch(action3)
   }
 
   handleChangingSelectedProduct = (id) => {
     const selectedProduct = this.props.productList[id];
     const {dispatch} = this.props;
-    const action = {
-      type: 'SELECT_PRODUCT', 
-      product: selectedProduct
-    }
+    const action = a.selectProduct(selectedProduct)
     dispatch(action)
   }
 
   handleAddingNewProductToList = (newProduct) => {
     const {dispatch} = this.props;
     const {name, brand, price, quantity, id} = newProduct;
-    const action = {
-      type: 'ADD_PRODUCT',
+    const action = a.addProduct({
       name: name,
       brand: brand,
       price: price,
       quantity: quantity,
       id: id
-    }
+    })
     dispatch(action);
-    const toggle = {type: 'TOGGLE_FORM'}
-    dispatch(toggle);
+    const action2 = a.toggleForm()
+    dispatch(action2)
     
   }
   
   handleDecrementingQuantity = (productToEdit) => {
     const {dispatch} = this.props;
     const {name, brand, price, quantity, id} = productToEdit;
-    const action = {
-      type: 'ADD_PRODUCT',
+    const action = a.addProduct({
       name: name,
       brand: brand,
       price: price,
-      quantity: (quantity -1),
+      quantity: (quantity - 1),
       id: id
-    }
+    })
     dispatch(action);
-    const action2 = {
-      type: 'SELECT_PRODUCT',
-      product: null
-    }
+    const action2 = a.selectProduct(null)
     dispatch(action2)
   }
 
@@ -163,6 +131,9 @@ class ProductControl extends React.Component{
 
 ProductControl.propTypes = {
   productList: PropTypes.object,
+  selectedProduct: PropTypes.object,
+  editing: PropTypes.bool,
+  formVisibleOnPage: PropTypes.bool
 }
 
 const mapStateToProps = state => {
