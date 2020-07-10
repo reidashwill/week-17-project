@@ -1,0 +1,16 @@
+.header{
+  text-align: center;
+}
+.container{
+  height: 100vh;
+  padding: 4vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background: darkgray;
+  justify-content: flex-start;
+}
+button{
+  background-color: darkgoldenrod;
+  max-width: 100px;
+} 
