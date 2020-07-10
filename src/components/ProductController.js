@@ -15,20 +15,26 @@ class ProductControl extends React.Component{
     }
   }
 
-  // handleClick = () => {
-  //   if(this.state.selectedProduct){
-  //     this.setState({
-  //       editing: false,
-  //       selectedProduct: null
-  //     });
-  //   }else{
-  //     const {dispatch} = this.props;
-  //     const action = {
-  //       type: 'TOGGLE_FORM'
-  //     }
-  //     dispatch(action)
-  //   }
-  // }
+  handleClick = () => {
+    if(this.props.selectedProduct){
+      const {dispatch} = this.props;
+      const action = {
+        type: 'TOGGLE_EDIT'
+      }
+      dispatch(action)
+      const action2 = {
+        type: 'SELECT_PRODUCT',
+        product: null
+      }
+      dispatch(action2)
+    }else{
+      const {dispatch} = this.props;
+      const action = {
+        type: 'TOGGLE_FORM'
+      }
+      dispatch(action)
+    }
+  }
 
   handleDeletingProduct = (id) => {
     const {dispatch} = this.props;
@@ -69,7 +75,12 @@ class ProductControl extends React.Component{
 
   handleChangingSelectedProduct = (id) => {
     const selectedProduct = this.props.productList[id];
-    // this.setState({selectedProduct: selectedProduct})
+    const {dispatch} = this.props;
+    const action = {
+      type: 'SELECT_PRODUCT', 
+      product: selectedProduct
+    }
+    dispatch(action)
   }
 
   handleAddingNewProductToList = (newProduct) => {
