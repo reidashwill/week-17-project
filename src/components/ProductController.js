@@ -12,24 +12,23 @@ class ProductControl extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      selectedProduct: null,
     }
   }
 
-  handleClick = () => {
-    if(this.state.selectedProduct){
-      this.setState({
-        editing: false,
-        selectedProduct: null
-      });
-    }else{
-      const {dispatch} = this.props;
-      const action = {
-        type: 'TOGGLE_FORM'
-      }
-      dispatch(action)
-    }
-  }
+  // handleClick = () => {
+  //   if(this.state.selectedProduct){
+  //     this.setState({
+  //       editing: false,
+  //       selectedProduct: null
+  //     });
+  //   }else{
+  //     const {dispatch} = this.props;
+  //     const action = {
+  //       type: 'TOGGLE_FORM'
+  //     }
+  //     dispatch(action)
+  //   }
+  // }
 
   handleDeletingProduct = (id) => {
     const {dispatch} = this.props;
@@ -38,9 +37,9 @@ class ProductControl extends React.Component{
       id: id
     }
     dispatch(action)
-    this.setState({
-      selectedProduct: null
-    })
+    // this.setState({
+    //   selectedProduct: null
+    // })
   } 
 
   handleEditClick = () => {
@@ -62,15 +61,15 @@ class ProductControl extends React.Component{
       id: id
     }
     dispatch(action);
-    this.setState({ 
-      editing: false,
-      selectedProduct: null
-    })
+    // this.setState({ 
+    //   editing: false,
+    //   selectedProduct: null
+    // })
   }
 
   handleChangingSelectedProduct = (id) => {
     const selectedProduct = this.props.productList[id];
-    this.setState({selectedProduct: selectedProduct})
+    // this.setState({selectedProduct: selectedProduct})
   }
 
   handleAddingNewProductToList = (newProduct) => {
@@ -110,10 +109,10 @@ class ProductControl extends React.Component{
     let currentlyVisibleState = null;
     let buttonText = null
     if(this.props.editing){
-      currentlyVisibleState = <EditProductForm product = {this.state.selectedProduct} onEditProduct = {this.handleEditingProduct}/>
+      currentlyVisibleState = <EditProductForm product = {this.props.selectedProduct} onEditProduct = {this.handleEditingProduct}/>
       buttonText="See all of our beers!"
-    }else if(this.state.selectedProduct){
-      currentlyVisibleState = <ProductDetail product = {this.state.selectedProduct} onSellingPint={this.handleDecrementingQuantity} onClickingEdit = {this.handleEditClick} onClickingDelete = {this.handleDeletingProduct}/>
+    }else if(this.props.selectedProduct){
+      currentlyVisibleState = <ProductDetail product = {this.props.selectedProduct} onSellingPint={this.handleDecrementingQuantity} onClickingEdit = {this.handleEditClick} onClickingDelete = {this.handleDeletingProduct}/>
       buttonText = "See all of our beers!"
     }else if(this.props.formVisibleOnPage){
       currentlyVisibleState = <NewProductForm onNewProductCreation={this.handleAddingNewProductToList}/>
@@ -133,7 +132,7 @@ class ProductControl extends React.Component{
 }
 
 ProductControl.propTypes = {
-  productList: PropTypes.object
+  productList: PropTypes.object,
 }
 
 const mapStateToProps = state => {
