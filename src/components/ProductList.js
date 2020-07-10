@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Product from  './Product';
 
 function ProductList(props) {
-  if(props.productList.length === 0){
+  if(Object.values(props.productList).length === 0){
 
     return(
       <React.Fragment>
@@ -15,13 +15,12 @@ function ProductList(props) {
     return(
       <React.Fragment>
         <h1 className="header">Our Glorious Beer Selection!</h1>
-        {props.productList.map((product) =>
+        {Object.values(props.productList).map((product) => 
         <Product
           whenProductClicked = { props.onProductSelection}
           name={product.name}
           brand={product.brand}
           price={product.price}
-          alcoholContent={product.alcoholContent}
           quantity={product.quantity}
           id={product.id}
           key={product.id}/>
@@ -33,7 +32,7 @@ function ProductList(props) {
 }
 
 ProductList.propTypes = {
-  productList: PropTypes.array,
+  productList: PropTypes.object,
   onProductSelection: PropTypes.func
 };
 
