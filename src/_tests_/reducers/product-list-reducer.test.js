@@ -1,4 +1,4 @@
-import productListReducer from '../reducers/product-list-reducer';
+import productListReducer from '../../reducers/product-list-reducer';
 
 describe('productListReducer', () => {
   let action;
