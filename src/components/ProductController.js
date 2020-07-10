@@ -21,6 +21,10 @@ class ProductControl extends React.Component{
       const action = {
         type: 'TOGGLE_EDIT'
       }
+      const action2 = {
+        type: 'TOGGLE_FORM'
+      }
+      dispatch(action2)
     }else if(this.props.selectedProduct){
       const {dispatch} = this.props;
       const action = {
@@ -35,6 +39,7 @@ class ProductControl extends React.Component{
       }
       dispatch(action)
     }
+    
   }
 
   handleDeletingProduct = (id) => {
