@@ -17,7 +17,6 @@ Product.propTypes = {
   name: PropTypes.string.isRequired,
   brand: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
-  alcoholContent: PropTypes.string.isRequired,
   quantity: PropTypes.string.isRequired,
 };
 

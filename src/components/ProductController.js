@@ -67,11 +67,12 @@ class ProductControl extends React.Component{
 
   handleEditingProduct = (productToEdit) => {
     const {dispatch} = this.props;
-    const {id, name, price, quantity} = productToEdit;
+    const {id, name, brand, price, quantity} = productToEdit;
     const action = {
       type: 'ADD_PRODUCT',
       id: id,
       name: name,
+      brand: brand,
       price: price,
       quantity: quantity,
       
@@ -100,10 +101,11 @@ class ProductControl extends React.Component{
 
   handleAddingNewProductToList = (newProduct) => {
     const {dispatch} = this.props;
-    const {name, price, quantity, id} = newProduct;
+    const {name, brand, price, quantity, id} = newProduct;
     const action = {
       type: 'ADD_PRODUCT',
       name: name,
+      brand: brand,
       price: price,
       quantity: quantity,
       id: id
@@ -114,22 +116,24 @@ class ProductControl extends React.Component{
     
   }
   
-  // handleDecrementingQuantity = (productToEdit) => {
-  //   const {dispatch} = this.props;
-  //   const {name, price, quantity, id} = productToEdit;
-  //   const action = {
-  //     type: 'ADD_PRODUCT',
-  //     name: name,
-  //     price: price,
-  //     quantity: quantity--,
-  //     id: id
-  //   }
-  //   dispatch(action);
-  //   this.setState({ 
-  //     editing: false,
-  //     selectedProduct: null
-  //   })
-  // }
+  handleDecrementingQuantity = (productToEdit) => {
+    const {dispatch} = this.props;
+    const {name, brand, price, quantity, id} = productToEdit;
+    const action = {
+      type: 'ADD_PRODUCT',
+      name: name,
+      brand: brand,
+      price: price,
+      quantity: (quantity -1),
+      id: id
+    }
+    dispatch(action);
+    const action2 = {
+      type: 'SELECT_PRODUCT',
+      product: null
+    }
+    dispatch(action2)
+  }
 
   render(){
     let currentlyVisibleState = null;
