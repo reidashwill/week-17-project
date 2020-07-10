@@ -16,17 +16,18 @@ class ProductControl extends React.Component{
   // }
 
   handleClick = () => {
-    if(this.props.selectedProduct){
+    if(this.props.editing){
       const {dispatch} = this.props;
       const action = {
         type: 'TOGGLE_EDIT'
       }
-      dispatch(action)
-      const action2 = {
+    }else if(this.props.selectedProduct){
+      const {dispatch} = this.props;
+      const action = {
         type: 'SELECT_PRODUCT',
         product: null
       }
-      dispatch(action2)
+      dispatch(action)
     }else{
       const {dispatch} = this.props;
       const action = {
@@ -43,6 +44,11 @@ class ProductControl extends React.Component{
       id: id
     }
     dispatch(action)
+    const action2 = {
+      type: 'SELECT_PRODUCT',
+      product: null
+    }
+    dispatch(action2)
   } 
 
   handleEditClick = () => {
