@@ -25,7 +25,7 @@ As a user, I want to see how many pints are left in a keg.
 As a user, I want to be able to click a button next to a keg whenever I sell a pint of it. This should decrease the number of pints left by 1. Pints should not be able to go below 0.
 
 ## Setup/Installation Requirements
-* _Navigate to https://github.com/reidashwill/week_16_project_
+* _Navigate to https://github.com/reidashwill/week_17_project_
 * _clone the respository to your local machine_
 * _navigate to the cloned directory and open in your text editor of choice to view code_
 
@@ -33,7 +33,7 @@ As a user, I want to be able to click a button next to a keg whenever I sell a p
 * _run the command: npm run start to start a live server on your local machine_
 * _In your browser of choice, navigate to localhost:3000_
 
-
+* _see it desployed live at https://tap-house.herokuapp.com/_
 ## Known Bugs
 No known bugs at this time
 
