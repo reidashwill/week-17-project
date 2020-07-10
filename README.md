@@ -8,7 +8,8 @@ A project made to practice React fundamentals.  It gives the user full CRUD func
 
 ## Specs
 
-![Diagram of app components](./public/component-diagram.png)
+
+![Diagram of app components](./public/newer-diagram.drawio.svg)
 
 
 ## User Stories
@@ -41,8 +42,10 @@ No known bugs at this time
 
 * _JavaScript_
 * _React_
+* _Redux_
 * _PropTypes library_
 * _CSS_
+* _Ant Design_
 
 
 ### License
