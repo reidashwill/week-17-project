@@ -47,4 +47,19 @@ describe('productListReducer', () => {
       }
     })
   })
+
+  it('Should successfully delete a product', () => {
+    action = {
+      type: 'DELETE_PRODUCT',
+      id: 1
+    };
+    expect(productListReducer(currentState, action)).toEqual({
+      2: {
+        name: 'mead',
+        price: '5',
+        quantity: '19',
+        id: 2
+      }
+    });
+  });
 })
