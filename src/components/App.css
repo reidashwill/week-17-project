@@ -16,14 +16,12 @@ button{
   max-width: 100px;
 }
 
-.card{
-  background-color: black;
+.ant-card{
+ margin: 10px;
 }
 
 .flex-container {
-  flex: wrap;
-  height: 400px;
-  width: 800px;
+  flex-wrap: wrap;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
