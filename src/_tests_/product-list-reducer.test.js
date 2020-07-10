@@ -25,8 +25,26 @@ describe('productListReducer', () => {
     id: 1
   }
   
-  test('Should return default state if no action type is recognized', () => {
+  it('Should return default state if no action type is recognized', () => {
     expect(productListReducer({}, { type: null })).toEqual({});
   });
 
+  it('Should successfully add a product', () => {
+    const {name, price, quantity, id} = productData;
+    action = {
+      type: 'ADD_PRODUCT',
+      name: name,
+      price: price,
+      quantity: quantity,
+      id: id
+    };
+    expect(productListReducer({}, action)).toEqual({
+      [id] : {
+        name: name,
+        price: price,
+        quantity: quantity,
+        id: id
+      }
+    })
+  })
 })
